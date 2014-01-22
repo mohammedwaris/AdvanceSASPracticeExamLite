@@ -98,7 +98,7 @@
               	$('#previous-button').addClass('visibility-hidden');
               	$('#exam-header h1').html("Loading...");
               	$('#timer').html("");
-              	$.ajax({
+              	ajaxRequest = $.ajax({
                  	url: base_url,
                  	crossDomain: true,
                  	type: 'get',
@@ -362,8 +362,12 @@
          	}catch(e){}          
         }
         function quit_exam(){
-            if(timer != null)
-            	timer.stop();
+        	try{
+        		if(ajaxRequest)
+        			ajaxRequest.abort();
+            	if(timer != null)
+            		timer.stop();
+            }catch(e){}
             $.mobile.changePage('#main');
         }
         function show_result(){
