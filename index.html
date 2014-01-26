@@ -17,21 +17,22 @@
 			
 			document.addEventListener("pause", onApplicationPause, false);
 			document.addEventListener("resume", onApplicationResume, false);
-				if(getDevice() == "Android"){
+				if(getDevice() != "ios"){
 				  $('#exit-button').removeClass('visibility-hidden');
 				}
 			
 			var proVersionLink = "#";
-        	if(getDevice() == "Android"){
+        	if(getDevice() == "android"){
 				proVersionLink = "https://play.google.com/store/apps/details?id=com.jlojic.advancesaspracticeexampro";
-        	}else if(getDevice() == "iPhone" || getDevice() == "iPad"){
+        	}else if(getDevice() == "ios"){
         		proVersionLink = "https://itunes.apple.com/us/app/advance-sas-practice-exam-pro/id792433741?mt=8";
-        	
+        	}else if(getDevice() == "amazon"){
+        		proVersionLink = 'http://www.amazon.com/gp/mas/dl/android?p=com.jlojic.advancesaspracticeexampro';
         	}else{
         		proVersionLink = "#";
         	}
-        	//alert(proVersionLink);	
-        	 $('#get-pro-version-home').attr('href' , proVersionLink);
+	
+        	$('#get-pro-version-home').attr('href' , proVersionLink);
             $('#get-pro-version-result').attr('href' , proVersionLink);
 		}
 		
@@ -430,22 +431,21 @@
 		
 		function getDevice(){
 		  var inPlatform = device.platform;
-                  //alert(inPlatform);
-                  var outPlatform = "";
+		  inPlatform = inPlatform.toLowerCase();
+          //alert(inPlatform);
+          var outPlatform = "";
 		  
-		  if(inPlatform.indexOf("iPhone") >= 0)
-		     outPlatform = "iPhone";
-		  else if(inPlatform.indexOf("iPad") >= 0)
-		     outPlatform = "iPad";
-		  else if(inPlatform.indexOf("Android") >= 0)
-		     outPlatform = "Android";
-		  else if(inPlatform.indexOf("Blackberry") >= 0)
-		     outPlatofrm = "BlackBerry";
+		  if(inPlatform.indexOf("ios") >= 0)
+		     outPlatform = "ios";
+		  else if(inPlatform.indexOf("android") >= 0)
+		     outPlatform = "android";
+		  else if(inPlatform.indexOf("blackberry") >= 0)
+		     outPlatofrm = "blackberry";
 		  
 		  	 
-		  	// outPlatform = "iPhone";
+		 // outPlatform = "amazon";
 		  
-		  
+		 // alert(outPlatform);
 		  return outPlatform;
 		    
 		}
